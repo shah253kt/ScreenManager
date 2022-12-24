@@ -1,4 +1,3 @@
-#include <U8g2lib.h>
 #include "BasicMenuLine.h"
 
 BasicMenuLine::BasicMenuLine(char *label, const uint8_t *font)
@@ -19,7 +18,7 @@ BasicMenuLine::~BasicMenuLine()
     delete[] mLabel;
 }
 
-void BasicMenuLine::render(U8G2 *u8g2, uint8_t y, bool highlight)
+void BasicMenuLine::render(U8G2 *u8g2, u8g2_uint_t y, bool highlight)
 {
     drawButton(u8g2, y, highlight);
 }

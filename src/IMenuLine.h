@@ -7,11 +7,10 @@
 #include "WProgram.h"
 #endif
 
+#include <U8g2lib.h>
 #include "ScreenManagerConstants.h"
 
 #define MAX_MENU_LABEL_LENGTH 15
-
-class U8G2;
 
 class IMenuLine
 {
@@ -22,9 +21,9 @@ protected:
     void (*onClickHandler)(void);
 
 public:
-    virtual void render(U8G2 *u8g2, uint8_t y, bool highlight = false) = 0;
+    virtual void render(U8G2 *u8g2, u8g2_uint_t y, bool highlight = false) = 0;
     virtual void propagateAction(Action action);
-    void drawButton(U8G2 *u8g2, uint8_t y, bool highlight = false);
+    void drawButton(U8G2 *u8g2, u8g2_uint_t y, bool highlight = false);
     void setOnClickHandler(void (*handler)(void));
     void click();
 };

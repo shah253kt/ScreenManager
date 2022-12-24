@@ -7,11 +7,10 @@
 #include "WProgram.h"
 #endif
 
+#include <U8g2lib.h>
 #include "ScreenManagerConstants.h"
 
 #define MAX_SCREEN_TITLE_LENGTH 15
-
-class U8G2;
 
 class IScreen
 {
@@ -22,7 +21,7 @@ protected:
 public:
     virtual void render(U8G2 *u8g2) = 0;
     virtual void propagateAction(Action action);
-    void drawCenteredText(U8G2 *u8g2, char *text, uint16_t y);
+    void drawCenteredText(U8G2 *u8g2, char *text, u8g2_uint_t y);
     void drawTitle(U8G2 *u8g2);
 };
 

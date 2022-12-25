@@ -1,6 +1,13 @@
 #ifndef ScreenManagerConstants_H_
 #define ScreenManagerConstants_H_
 
+enum ScreenType
+{
+    SPLASH_SCREEN,
+    MENU_SCREEN,
+    CUSTOM_SCREEN
+};
+
 enum Action
 {
     ACTION_ARROW_UP,

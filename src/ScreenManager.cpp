@@ -32,7 +32,7 @@ void ScreenManager::render(IScreen *screen)
 
 bool ScreenManager::gotoScreen(IScreen &screen)
 {
-    if(screenStack->unshift(&screen))
+    if (screenStack->unshift(&screen))
     {
         update();
         return true;
@@ -43,7 +43,7 @@ bool ScreenManager::gotoScreen(IScreen &screen)
 
 bool ScreenManager::gotoPrevScreen()
 {
-    if (screenStack->pop())
+    if (screenStack->size() > 1 && screenStack->shift())
     {
         update();
         return true;
@@ -56,7 +56,16 @@ void ScreenManager::propagateAction(Action action)
 {
     if (screenStack->size() > 0)
     {
-        screenStack->get(0)->propagateAction(action);
-        update();
+        IScreen *screen = screenStack->get(0);
+
+        if (action == ACTION_BACK && screen->getType() != SPLASH_SCREEN && screen->getType() != CUSTOM_SCREEN)
+        {
+            gotoPrevScreen();
+        }
+        else
+        {
+            screen->propagateAction(action);
+            update();
+        }
     }
 }

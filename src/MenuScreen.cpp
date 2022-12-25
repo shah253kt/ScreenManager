@@ -12,6 +12,7 @@
 MenuScreen::MenuScreen(char *title)
     : mCurrentActiveMenuIndex(0)
 {
+    mScreenType = MENU_SCREEN;
     mTitle = title;
     mMenuLines = new LinkedList<IMenuLine *>();
 }
@@ -19,6 +20,7 @@ MenuScreen::MenuScreen(char *title)
 MenuScreen::MenuScreen(const __FlashStringHelper *title)
     : mCurrentActiveMenuIndex(0)
 {
+    mScreenType = MENU_SCREEN;
     mTitle = new char[MAX_SCREEN_TITLE_LENGTH];
     strncpy_P(mTitle, (const char *)title, MAX_SCREEN_TITLE_LENGTH - 1);
     mMenuLines = new LinkedList<IMenuLine *>();
@@ -26,12 +28,13 @@ MenuScreen::MenuScreen(const __FlashStringHelper *title)
 
 MenuScreen::~MenuScreen()
 {
-    delete [] mTitle;
+    delete[] mTitle;
     delete mMenuLines;
 }
 
 void MenuScreen::render(U8G2 *u8g2)
 {
+    preRender();
     IMenuLine *menuLine;
     drawTitle(u8g2);
 
@@ -40,6 +43,8 @@ void MenuScreen::render(U8G2 *u8g2)
         menuLine = mMenuLines->get(i);
         menuLine->render(u8g2, (i + 1) * mTextHeight, i == mCurrentActiveMenuIndex);
     }
+
+    postRender();
 }
 
 void MenuScreen::propagateAction(Action action)
@@ -56,6 +61,8 @@ void MenuScreen::propagateAction(Action action)
     {
         mMenuLines->get(mCurrentActiveMenuIndex)->propagateAction(action);
     }
+
+    propagateActionExternally(action);
 }
 
 bool MenuScreen::addMenu(IMenuLine &menuLine)

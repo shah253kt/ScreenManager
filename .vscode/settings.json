@@ -22,6 +22,13 @@
         "xlocmon": "cpp",
         "xlocnum": "cpp",
         "xloctime": "cpp",
-        "sstream": "cpp"
+        "sstream": "cpp",
+        "chrono": "cpp",
+        "functional": "cpp",
+        "optional": "cpp",
+        "system_error": "cpp",
+        "xtr1common": "cpp",
+        "ratio": "cpp",
+        "cmath": "cpp"
     }
 }

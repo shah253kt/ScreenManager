@@ -5,6 +5,7 @@ enum ScreenType
 {
     SPLASH_SCREEN,
     MENU_SCREEN,
+    NUMERICAL_EDIT_SCREEN,
     CUSTOM_SCREEN
 };
 
